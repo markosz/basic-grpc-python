@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-timesrv
+spec:
+  selector:
+    matchLabels:
+      run: my-timesrv
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: my-timesrv
+    spec:
+      containers:
+      - name: my-timesrv
+        image: time-grpc-app:local
+        workingDir: /app
+        ports:
+        - containerPort: 50051
+        command:
+        - python3
+        - "time_server.py"
+       
